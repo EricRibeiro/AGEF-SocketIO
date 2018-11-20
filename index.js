@@ -20,21 +20,23 @@ io.on('connection', (socket) => {
     });
   }
  
-  socket.on('nickname', (nickname) => {
+  socket.on('nome', (nickname) => {
     socket.nickname = nickname;
   });
 
   socket.on('total', (message) => {
     //io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});    
   });
+
+  socket.on('entrei', (message) => {
+    io.emit('cliente', {url: message, nickname:socket.nickname});    
+  });
   
   socket.on('vendi', (message) => {
 
-    io.emit('venda', {venda: message, nickname: socket.nickname} );
+    io.emit('venda', { venda: message, nickname: socket.nickname, data : dateFormat(new Date(), "dd/mm/yyyy") });
 
   });
-
-
 
 });
  
